@@ -3,6 +3,7 @@ package com.dazt.msscpersons.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.*;
 import java.time.OffsetDateTime;
@@ -10,6 +11,7 @@ import java.time.OffsetDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public class BaseDTO {
 
     @NotEmpty(message = "${id} must not be empty.")

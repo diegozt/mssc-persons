@@ -1,9 +1,14 @@
 package com.dazt.msscpersons.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 
-public class GeolocationDTO extends BaseDTO {
+@Getter
+@Setter
+public class GeolocationDTO {
 
     @NotEmpty
     @Max(value = 50, message = "{address} must not be more than 50 characters.")

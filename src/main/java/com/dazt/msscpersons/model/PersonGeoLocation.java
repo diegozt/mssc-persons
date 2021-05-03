@@ -1,18 +1,20 @@
 package com.dazt.msscpersons.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
-public class Person extends BaseModel {
+public class PersonGeoLocation extends BaseModel {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -22,21 +24,14 @@ public class Person extends BaseModel {
     )
     @Type(type="org.hibernate.type.UUIDCharType")
     @Column(name = "id", length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false )
-    public UUID personId;
+    public UUID personGeoLocationId;
 
-    private String firstName;
+    private String address;
 
-    private String secondName;
+    private String district;
 
-    private String firstLastName;
+    private String department;
 
-    private String secondLastName;
-
-    private String documentType;
-
-    private String documentNumber;
-
-    @OneToOne
-    private PersonGeoLocation geoLocation;
+    private String country;
 
 }

@@ -2,13 +2,15 @@ package com.dazt.msscpersons.dto;
 
 import com.dazt.msscpersons.DocumentType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class PersonDTO extends BaseDTO {
 
     @NotEmpty
@@ -37,6 +39,7 @@ public class PersonDTO extends BaseDTO {
             message = "${documentNumber} length must be between 1 and 50 characters.")
     private String documentNumber;
 
+    @NotEmpty
     private GeolocationDTO geolocationDTO;
 
 }
