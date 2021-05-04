@@ -1,6 +1,6 @@
 package com.dazt.msscpersons.dto;
 
-import com.dazt.msscpersons.DocumentType;
+import com.dazt.msscpersons.dto.type.DocumentType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

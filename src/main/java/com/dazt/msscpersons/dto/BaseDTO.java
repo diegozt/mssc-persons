@@ -1,14 +1,13 @@
 package com.dazt.msscpersons.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.*;
 import java.time.OffsetDateTime;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
@@ -30,5 +29,9 @@ public class BaseDTO {
     @NotEmpty(message = "${createdDate} must not be empty.")
     @PastOrPresent(message = "${createdDate} must to be past or present, not future.")
     private OffsetDateTime createdDate;
+
+    @NotEmpty(message = "${environmentPort} must not be empty.")
+    @Positive(message = "${environmentPort} must to be a valid value - numeric and positive.")
+    private String environmentPort;
 
 }

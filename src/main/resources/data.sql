@@ -8,6 +8,9 @@ INSERT INTO PERSON_GEO_LOCATION
 VALUES
 ('f27e8efc-f871-4e3e-97d6-3afa7a903a49', sysdate, 'ADMIN', sysdate, 'ADMIN', 1, 'Calle Las Golondrinas 2512', 'Miraflores', 'San Jose', 'Costa Rica');
 
+
+
+
 INSERT INTO PERSON
 (id, creation_date, creation_user, last_modified_date, last_modified_user, version, first_name, first_last_name, document_type, document_number, geo_location_id)
 values
