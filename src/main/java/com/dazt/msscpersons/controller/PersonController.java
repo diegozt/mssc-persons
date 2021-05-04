@@ -37,8 +37,8 @@ public class PersonController {
             @PathVariable(name = "secondLastName", required = false) Optional<String> secondLastName
             ) {
 
-        //TODO Pending to set the mmssc port in a generic class, not in the Controller.
         List<PersonDTO> lstReturn = personService.findByName(firstName, secondName, lastName, secondLastName);
+        //TODO Pending to set the mmssc port in a generic class, not in the Controller.
         lstReturn.stream().forEach(personObj -> {
             personObj.setEnvironmentPort(environment.getProperty("server.port"));
         });
@@ -47,7 +47,12 @@ public class PersonController {
 
     @GetMapping("/mssc-persons/all/")
     public List<PersonDTO> retrievePerson() {
-        return personService.findAll();
+        List<PersonDTO> lstReturn = personService.findAll();
+        //TODO Pending to set the mmssc port in a generic class, not in the Controller.
+        lstReturn.stream().forEach(personObj -> {
+            personObj.setEnvironmentPort(environment.getProperty("server.port"));
+        });
+        return lstReturn;
     }
 
 }
