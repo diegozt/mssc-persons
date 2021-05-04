@@ -2,17 +2,19 @@ package com.dazt.msscpersons.mapper;
 
 import com.dazt.msscpersons.dto.GeolocationDTO;
 import com.dazt.msscpersons.dto.PersonDTO;
-import com.dazt.msscpersons.mapper.decorator.PersonMapperDecorator;
 import com.dazt.msscpersons.model.Person;
 import com.dazt.msscpersons.model.PersonGeoLocation;
 import org.mapstruct.*;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(uses = {
         UUIDMapper.class,
-        DateMapper.class
+        DateMapper.class,
+        TrackingDataMapper.class
 })
-//@DecoratedWith(PersonMapperDecorator.class)
 public interface PersonMapper {
+
+    PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
     @Mapping(target = "geoLocation", source = "geolocationDTO")
     @Mapping(target = "personId", source = "id")
