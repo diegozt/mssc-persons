@@ -1,5 +1,6 @@
 package com.dazt.msscpersons.service.impl;
 
+import com.dazt.msscpersons.configuration.Configuration;
 import com.dazt.msscpersons.dto.GeolocationDTO;
 import com.dazt.msscpersons.dto.PersonDTO;
 import com.dazt.msscpersons.dto.type.DocumentType;
@@ -12,6 +13,7 @@ import com.dazt.msscpersons.repository.PersonRepository;
 import com.dazt.msscpersons.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,6 +33,9 @@ public class PersonServiceImpl implements PersonService {
     private final PersonMapper personMapper;
 
     private final PersonGeolocationMapper personGeolocationMapper;
+
+    @Autowired
+    private Configuration configuration;
 
     @Override
     public List<PersonDTO> findByName(Optional<String> firstName, Optional<String> secondName, Optional<String> lastName, Optional<String> secondLastName) {
@@ -84,7 +89,7 @@ public class PersonServiceImpl implements PersonService {
                     personDTO.getSecondLastName(), personDTO.getDocumentType().name(), personDTO.getDocumentNumber(), UUID.fromString(personDTO.getId()));
             log.debug("Saved Beer Order: " + personDTO.getId());
         } else {
-            throw new RuntimeException("Person to be updated was not found");
+            throw new RuntimeException(configuration.getError());
         }
     }
 
@@ -96,7 +101,7 @@ public class PersonServiceImpl implements PersonService {
             personRepository.deleteById(personId);
             log.debug("Person deleted: " + personId);
         } else {
-            throw new RuntimeException("Person to be deleted was not found");
+            throw new RuntimeException(configuration.getError());
         }
     }
 
