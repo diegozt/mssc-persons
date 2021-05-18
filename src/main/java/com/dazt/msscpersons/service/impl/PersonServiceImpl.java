@@ -1,6 +1,8 @@
 package com.dazt.msscpersons.service.impl;
 
+import com.dazt.msscpersons.dto.GeolocationDTO;
 import com.dazt.msscpersons.dto.PersonDTO;
+import com.dazt.msscpersons.dto.type.DocumentType;
 import com.dazt.msscpersons.mapper.PersonGeolocationMapper;
 import com.dazt.msscpersons.mapper.PersonMapper;
 import com.dazt.msscpersons.model.Person;
@@ -67,17 +69,23 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDTO updatePerson(UUID personId, PersonDTO personDTO) {
+    public void updatePerson(UUID personId, PersonDTO personDTO) {
         Optional<Person> optionalPerson = personRepository.findById(personId);
 
         if (optionalPerson.isPresent()) {
-            Person person = personMapper.dtoToEntity(personDTO);
-            Person updatedPerson = personRepository.save(person);
-            log.debug("Saved Beer Order: " + updatedPerson.getPersonId());
-            return personMapper.entityToDto(updatedPerson);
+            Optional<PersonGeoLocation> optionalPersonGeoLocation = personGeolocationRepository.findById(UUID.fromString(
+                    personDTO.getGeolocationDTO().getId()));
+            if(optionalPersonGeoLocation.isPresent()) {
+                GeolocationDTO geolocationDTO = personDTO.getGeolocationDTO();
+                personGeolocationRepository.updatePersonGeolocation(geolocationDTO.getAddress(), geolocationDTO.getDistrict(), geolocationDTO.getDepartment(),
+                        geolocationDTO.getCountry(), UUID.fromString(geolocationDTO.getId()));
+            }
+            personRepository.updatePerson(personDTO.getFirstName(), personDTO.getSecondName(), personDTO.getFirstLastName(),
+                    personDTO.getSecondLastName(), personDTO.getDocumentType().name(), personDTO.getDocumentNumber(), UUID.fromString(personDTO.getId()));
+            log.debug("Saved Beer Order: " + personDTO.getId());
+        } else {
+            throw new RuntimeException("Person to be updated was not found");
         }
-
-        throw new RuntimeException("Person to be updated was not found");
     }
 
     @Override

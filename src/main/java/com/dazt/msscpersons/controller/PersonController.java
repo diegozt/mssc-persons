@@ -63,8 +63,8 @@ public class PersonController {
 
     @PutMapping("/mssc-persons/{personId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public PersonDTO updatePerson(@RequestBody PersonDTO personDTO, @PathVariable(name = "personId") UUID personId){
-        return personService.updatePerson(personId, personDTO);
+    public void updatePerson(@RequestBody PersonDTO personDTO, @PathVariable(name = "personId") UUID personId){
+        personService.updatePerson(personId, personDTO);
     }
 
     @DeleteMapping("/mssc-persons/delete/{personId}")

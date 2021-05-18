@@ -15,7 +15,7 @@ public interface PersonService {
 
     PersonDTO createPerson(PersonDTO personDTO);
 
-    PersonDTO updatePerson(UUID personId, PersonDTO personDTO);
+    void updatePerson(UUID personId, PersonDTO personDTO);
 
     void deletePerson(UUID personId);
 }
