@@ -5,6 +5,7 @@ import com.dazt.msscpersons.model.Person;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface PersonService {
 
@@ -12,4 +13,9 @@ public interface PersonService {
 
     List<PersonDTO> findAll();
 
+    PersonDTO createPerson(PersonDTO personDTO);
+
+    PersonDTO updatePerson(UUID personId, PersonDTO personDTO);
+
+    void deletePerson(UUID personId);
 }

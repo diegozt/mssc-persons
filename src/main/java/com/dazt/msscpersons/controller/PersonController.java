@@ -9,12 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -53,6 +53,23 @@ public class PersonController {
             personObj.setEnvironmentPort(environment.getProperty("server.port"));
         });
         return lstReturn;
+    }
+
+    @PostMapping("/mssc-persons")
+    @ResponseStatus(HttpStatus.CREATED)
+    public PersonDTO createPerson(@RequestBody PersonDTO personDTO){
+        return personService.createPerson(personDTO);
+    }
+
+    @PutMapping("/mssc-persons/{personId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public PersonDTO updatePerson(@RequestBody PersonDTO personDTO, @PathVariable(name = "personId") UUID personId){
+        return personService.updatePerson(personId, personDTO);
+    }
+
+    @DeleteMapping("/mssc-persons/delete/{personId}")
+    public void deletePerson(@PathVariable(name = "personId") UUID personId) {
+        personService.deletePerson(personId);
     }
 
 }

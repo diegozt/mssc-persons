@@ -11,6 +11,9 @@ import javax.validation.constraints.NotEmpty;
 public class GeolocationDTO {
 
     @NotEmpty
+    private String id;
+
+    @NotEmpty
     @Max(value = 50, message = "{address} must not be more than 50 characters.")
     private String address;
 
