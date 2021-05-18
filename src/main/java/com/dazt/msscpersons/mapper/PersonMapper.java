@@ -27,8 +27,10 @@ public interface PersonMapper {
     @InheritInverseConfiguration
     PersonDTO entityToDto(Person person);
 
+    @Mapping(target = "personGeoLocationId", source = "id")
     PersonGeoLocation geoLocationDtoToPersonGeoLocation(GeolocationDTO geolocationDTO);
 
+    @InheritInverseConfiguration
     GeolocationDTO personGeoLocationToGeoLocationDto(PersonGeoLocation personGeoLocation);
 
 }
